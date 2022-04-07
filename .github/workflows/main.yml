@@ -37,6 +37,12 @@ jobs:
           platforms: linux/arm64, linux/amd64, linux/s390x
           file: ./dockerfile.v1
           push: true
-          tags: maciejrak/labx:gh_qemu
+          tags: maciejrak/labx:gh_qemu_i_cache
           labels: ${{ steps.meta.outputs.labels }}
-          
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,mode=max,dest=/tmp/.buildx-cache-new
+
+      - name: Move cache 
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
