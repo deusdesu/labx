@@ -3,7 +3,7 @@ FROM ubuntu:latest
 WORKDIR '/app'
 ENV NODE_OPTIONS=--openssl-legacy-provider
 COPY package.json .
-RUN npm install
+RUN npm install -g npm
 
 COPY . .
 
